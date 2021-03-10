@@ -30,6 +30,7 @@ termcolor
 fastapi
 uvicorn
 streamlit
+matplotlib
 
 
 
