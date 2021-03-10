@@ -8,7 +8,7 @@ import numpy as np
 ## LOADING THE XTEST FOR ONE SUBJECT
 def loading_data(subject_number):
     print('loading file')
-    xtest_loaded = pickle.load(open(f"HandMotions/data/xtest{subject_number}.pkl","rb"))
+    xtest_loaded = pickle.load(open(f"HandMotions/data/xtest{subject_number}_50.pkl","rb"))
     print('loaded correctly')
     return xtest_loaded
 
@@ -50,7 +50,7 @@ subject_number = st.selectbox('Select a subject', df['first column'])
 
 
 
-second_segment_number = st.slider('second', 0, 284, 0)
+second_segment_number = st.slider('second', 0, 50, 0)
 print(second_segment_number)
 visualize(second_segment_number, subject_number)
 
