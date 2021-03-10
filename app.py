@@ -42,6 +42,7 @@ st.markdown('''
 
     ''')
 
+
 df = get_select_subject()
 
 subject_number = st.selectbox('Select a subject', df['first column'])
