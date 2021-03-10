@@ -1,1 +1,1 @@
-web: pip install . -U && Hand-Motions-run
+web: sh setup.sh && streamlit run app.py
