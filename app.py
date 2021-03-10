@@ -18,6 +18,9 @@ def visualize(second_segment_number, subject_number):
     xtest = loading_data(subject_number)
     channels = (np.transpose(xtest))
     fig= plt.figure(figsize=(40,10))
+    plt.tick_params(axis='both', which='major', labelsize=40)
+    plt. xlabel('time (ms)', fontsize=50)
+    plt. ylabel('Frequency (Hz)', fontsize=50)
     motor_cortex_channels = [4, 8, 9, 12, 13, 14, 18, 19]
     for i in motor_cortex_channels:
         plt.plot(channels[i][(second_segment_number*1000):((second_segment_number*1000)+1000)])
@@ -50,16 +53,17 @@ second_segment_number = st.slider('second', 0, 284, 0)
 print(second_segment_number)
 visualize(second_segment_number, subject_number)
 
-pred_1 = pickle.load(open("pred1.pkl","rb"))
+
 
 
 '''You chose segment'''
 st.write(second_segment_number)
 
-def search(second_segment_number):
-   return pred_1[int(second_segment_number)]
+def search(subject_number, second_segment_number):
+   pred = pickle.load(open(f"HandMotions/predictions/pred{subject_number}.pkl","rb"))
+   return pred[int(second_segment_number)]
 
-predictions= search(second_segment_number)
+predictions= search(subject_number, second_segment_number)
 for prediction in predictions:
     st.write(prediction)
 
