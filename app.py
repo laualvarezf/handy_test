@@ -45,28 +45,38 @@ st.markdown('''
 
 df = get_select_subject()
 
-subject_number = st.selectbox('Select a subject', df['first column'])
+st.markdown('''
+### Please select a subject
+''')
 
+subject_number = st.selectbox('1-12', df['first column'])
 
+st.markdown('''
+### Please select a second you want to predict on
+''')
 
-
-second_segment_number = st.slider('second', 0, 50, 0)
+second_segment_number = st.slider('0-50', 0, 50, 1)
 print(second_segment_number)
 visualize(second_segment_number, subject_number)
 
-
-
-
-'''You chose segment'''
-st.write(second_segment_number)
 
 def search(subject_number, second_segment_number):
    pred = pickle.load(open(f"HandMotions/predictions/pred{subject_number}.pkl","rb"))
    return pred[int(second_segment_number)]
 
+st.markdown('''
+### Predicted movement
+''')
+
 predictions= search(subject_number, second_segment_number)
-for prediction in predictions:
-    st.write(prediction)
 
-
-
+if len(predictions) == 1:
+    if second_segment_number == 1:
+        st.markdown(f'At {second_segment_number} second the predicted movement is: **{predictions[0]}**')
+    else:
+        st.markdown(f'At {second_segment_number} seconds the predicted movement is: **{predictions[0]}**')
+else:
+    if second_segment_number == 1:
+        st.markdown(f'At {second_segment_number} second the predicted movements are: **{predictions[0]}** and **{predictions[-1]}**')
+    else:
+        st.markdown(f'At {second_segment_number} seconds the predicted movements are: **{predictions[0]}** and **{predictions[-1]}**')
