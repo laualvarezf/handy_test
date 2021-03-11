@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 
 ## LOADING THE XTEST FOR ONE SUBJECT
@@ -36,12 +37,12 @@ def get_select_subject():
         })
 
 ## START OF THE APP
-st.markdown('''
+st.markdown("<h1 style='text-align: center; color: black;'>Welcome to Biohackers Wave Wizard</h1><br>", unsafe_allow_html=True)
 
-    # Welcome to Biohackers Wave Wizard
 
-    ''')
+st.markdown("<h2 style='text-align: center; color: black;'>How does it work?</h2>", unsafe_allow_html=True)
 
+st.markdown("<p style='text-align: center; color: black;'> Use our app to predict the hand movement of different subjects at a given second. First start by selecting a subject from the dropdown. Afterwards, use the slider to select a second. A visual representation of the main brain waves that control movement will be displayed along with our hand movement prediction. Enjoy! </p><br><br>", unsafe_allow_html=True)
 
 df = get_select_subject()
 
@@ -80,3 +81,18 @@ else:
         st.markdown(f'At {second_segment_number} second the predicted movements are: **{predictions[0]}** and **{predictions[-1]}**')
     else:
         st.markdown(f'At {second_segment_number} seconds the predicted movements are: **{predictions[0]}** and **{predictions[-1]}**')
+
+
+images = []
+for name in ['josh', 'kenza', 'sofia', 'yo']:
+    image = Image.open(f'images/{name}.jpeg')
+    image = image.resize((174, 174))
+    images.append(image)
+
+st.markdown("")
+st.markdown("<h2 style='text-align: center; color: black;'><br>Meet the team</h2><br>", unsafe_allow_html=True)
+
+st.image(images, caption=['Joshua Bugg', 'Kenza Mandri', 'Sofia Martins', 'Laura Alvarez'], use_column_width=False)
+
+st.markdown("<p style='text-align: center; color: black;'> We are a group of students at Le Wagon London interested in the way we can solve real world problems using data. We hope you enjoy our project as much as we enjoyed making it. Keep posted for updates and have fun!</p>", unsafe_allow_html=True)
+
